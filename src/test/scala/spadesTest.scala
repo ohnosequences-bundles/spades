@@ -1,7 +1,7 @@
 package ohnosequences.statika.tests
 
 import ohnosequences.statika._, aws._, bundles._
-import ohnosequences-bundles.statika.spades._
+import ohnosequencesBundles.statika.spades._
 
 import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
@@ -11,16 +11,16 @@ import ohnosequences.awstools.regions.Region._
 
 class ApplicationTest extends org.scalatest.FunSuite {
 
-  val ec2 = EC2.create(new ProfileCredentialsProvider("intercrossing"))
+  val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
 
   def testBundle[A <: AnyAMI, B <: AnyBundle](ami: A, bundle: B)(implicit comp: A => Compatible[A, B]) = {
     test("Apply "+bundle.name+" bundle to an instance"){
       val specs = InstanceSpecs(
         instanceType = InstanceType.m1_small,
         amiId = ami.id,
-        keyName = "statika-test",
+        keyName = "era7.mmanrique",
         userData = ami.userScript(bundle),
-        instanceProfile = Some("god")
+        instanceProfile = Some("era7-projects")
       )
 
       println(specs.userData)

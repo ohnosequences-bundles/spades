@@ -1,4 +1,4 @@
-package ohnosequences-bundles.statika
+package ohnosequencesBundles.statika
 
 import ohnosequences.cosas.typeSets._
 import ohnosequences.statika._, bundles._, instructions._, aws._
@@ -15,8 +15,7 @@ case object spades {
 
       Seq("aws", "s3", "cp", "s3://resources.ohnosequences.com/spades/SPAdes-3.1.0-Linux.tar.gz", "./"  ) -&-
       Seq("tar","-xvf", "SPAdes-3.1.0-Linux.tar.gz") -&-
-      Seq("cp","./SPAdes-3.1.0-Linux/spades.py","/usr/bin/") ->-
-    
+      Seq("ln", "-s","./SPAdes-3.1.0-Linux/bin/spades.py","/usr/bin/") ->-
       success(fullName + " is installed")
     }
   }
@@ -25,7 +24,7 @@ case object spades {
   case object compatibles {
 
     implicit def spadesCompat[E <: AmazonLinuxAMI](e: E): Compatible[E, spades.type] =
-      new Compatible(e, spades, generated.metadata.spades)
+      new Compatible(e, spades, generated.metadata.Spades)
   }
 
 }

@@ -1,7 +1,7 @@
 SbtStatikaPlugin.projectSettings
 
 name := "spades"
-organization := "ohnosequences-bundles"
+organization := "ohnosequencesBundles"
 description := "A bundle for spades tool"
 
 publishBucketSuffix := "era7.com"
