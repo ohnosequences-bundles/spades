@@ -12,7 +12,11 @@ case object spades {
   case object spades extends Bundle(∅) {
 
     def install: Results = {
-      // do someting here
+
+      Seq("aws", "s3", "cp", "s3://resources.ohnosequences.com/spades/SPAdes-3.1.0-Linux.tar.gz", "./"  ) -&-
+      Seq("tar","-xvf", "SPAdes-3.1.0-Linux.tar.gz") -&-
+      Seq("cp","./SPAdes-3.1.0-Linux/spades.py","/usr/bin/") ->-
+    
       success(fullName + " is installed")
     }
   }
