@@ -20,14 +20,15 @@ case object spades {
       val getFiles =
         Seq("aws", "s3", "cp", "s3://resources.ohnosequences.com/spades/SPAdes-3.1.0-Linux.tar.gz", "./") -&- Seq("tar","-xvf", "SPAdes-3.1.0-Linux.tar.gz")
 
-      val spadesBin = "SPAdes-3.1.0-Linux"/"bin"/"spades.py"
+      val spadesBin = "spades.py"
+      val spadesBinPath = "SPAdes-3.1.0-Linux"/"bin"/spadesBin
       val usrbin = root/"usr"/"bin"
 
-      ln.s(wd/spadesBin, usrbin)
+      ln.s(wd/spadesBinPath, usrbin/spadesBin)
 
       //Seq("ln", "-s","./SPAdes-3.1.0-Linux/bin/spades.py","/usr/bin/")
 
-      if ( exists(usrbin/"spades.py") )
+      if ( exists(usrbin/spadesBin) )
         success(fullName + " is installed")
       else
         failure("Something went wrong with the linking :(")
