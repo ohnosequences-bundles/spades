@@ -4,3 +4,5 @@ resolvers += "Era7 maven snapshots" at "http://snapshots.era7.com.s3.amazonaws.c
 addSbtPlugin("ohnosequences" % "sbt-statika" % "2.0.0-SNAPSHOT")
 
 resolvers += "Github-API" at "http://repo.jenkins-ci.org/public/"
+
+dependencyOverrides += "org.kohsuke" % "github-api" % "1.49"
