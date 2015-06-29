@@ -1,15 +1,13 @@
 package ohnosequencesBundles.statika
 
-import ohnosequences.cosas.typeSets._
-import ohnosequences.statika._, bundles._, instructions._, aws._
-import ohnosequences.awstools.regions.Region._
+import ohnosequences.statika._, bundles._, instructions._
 
 
 case object spades {
 
-  case object ami extends amzn_ami_pv_64bit(Ireland)(1)
+  // case object ami extends amzn_ami_pv_64bit(Ireland)(1)
 
-  case object spades extends Bundle(∅) {
+  case object spades extends Bundle {
 
 
     def install: Results = {
@@ -29,17 +27,10 @@ case object spades {
       //Seq("ln", "-s","./SPAdes-3.1.0-Linux/bin/spades.py","/usr/bin/")
 
       if ( exists(usrbin/spadesBin) )
-        success(fullName + " is installed")
+        success(bundleFullName + " is installed")
       else
         failure("Something went wrong with the linking :(")
     }
-  }
-
-
-  case object compatibles {
-
-    implicit def spadesCompat[E <: AmazonLinuxAMI](e: E): Compatible[E, spades.type] =
-      new Compatible(e, spades, generated.metadata.Spades)
   }
 
 }
