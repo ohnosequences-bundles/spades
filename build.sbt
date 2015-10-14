@@ -12,7 +12,6 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "ohnosequences" %% "statika" % "2.0.0-SNAPSHOT",
-  "org.scalatest" %% "scalatest" % "2.2.4" % Test,
-  "com.lihaoyi"   %% "ammonite-ops" % "0.2.7"
+  "ohnosequences" %% "statika"   % "2.0.0-M4",
+  "org.scalatest" %% "scalatest" % "2.2.5" % Test
 )

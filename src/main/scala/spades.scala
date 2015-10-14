@@ -1,31 +1,26 @@
 package ohnosequencesBundles.statika
 
 import ohnosequences.statika._, bundles._, instructions._
+import java.io.File
 
-case object spades {
+abstract class Spades(val version: String) extends Bundle() { spades =>
 
-  case object spades extends Bundle {
+  val folder = s"SPAdes-${spades.version}-Linux"
+  val tarball = spades.folder + ".tar.gz"
+  val binary = "spades.py"
 
-    import ammonite.ops._
+  lazy val getTarball = cmd("wget")(
+    s"https://s3-eu-west-1.amazonaws.com/resources.ohnosequences.com/spades/${spades.version}/${spades.tarball}"
+  )
 
-    val spadesBin = "spades.py"
-    val spadesBinPath = "SPAdes-3.1.0-Linux"/"bin"/spadesBin
-    val usrbin = root/"usr"/"bin"
+  lazy val extractTarball = cmd("tar")("-xvzf", spades.tarball)
 
-    def install: Results = {
+  lazy val linkBinaries = cmd("ln")(
+    "-s",
+    new File(s"${spades.folder}/${spades.binary}").getCanonicalPath,
+    s"/usr/bin/${spades.binary}"
+  )
 
-      Seq("aws", "s3", "cp", "s3://resources.ohnosequences.com/spades/SPAdes-3.1.0-Linux.tar.gz", "./") -&-
-      Seq("tar","-xvf", "SPAdes-3.1.0-Linux.tar.gz") ->- {
+  def instructions: AnyInstructions = getTarball -&- extractTarball -&- linkBinaries
 
-        // cmds return Unit. Sad.
-        val wd = cwd
-        ln.s(wd/spadesBinPath, usrbin/spadesBin)
-
-        if ( exists(usrbin/spadesBin) )
-          success(bundleFullName + " is installed")
-        else
-          failure("Something went wrong with the linking :(")
-      }
-    }
-  }
 }
