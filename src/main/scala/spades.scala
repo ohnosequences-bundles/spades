@@ -18,7 +18,7 @@ abstract class Spades(val version: String) extends Bundle() { spades =>
   lazy val linkBinaries = cmd("ln")(
     "-s",
     new File(s"${spades.folder}/${spades.binary}").getCanonicalPath,
-    s"/usr/bin/${spades.binary}"
+    s"/usr/${spades.binary}"
   )
 
   def instructions: AnyInstructions = getTarball -&- extractTarball -&- linkBinaries
