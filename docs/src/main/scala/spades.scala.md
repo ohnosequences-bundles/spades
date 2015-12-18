@@ -9,7 +9,7 @@ abstract class Spades(val version: String) extends Bundle() { spades =>
 
   val folder = s"SPAdes-${spades.version}-Linux"
   val tarball = spades.folder + ".tar.gz"
-  val binary = "spades.py"
+  val binary = "bin/spades.py"
 
   lazy val getTarball = cmd("wget")(
     s"https://s3-eu-west-1.amazonaws.com/resources.ohnosequences.com/spades/${spades.version}/${spades.tarball}"
@@ -20,7 +20,7 @@ abstract class Spades(val version: String) extends Bundle() { spades =>
   lazy val linkBinaries = cmd("ln")(
     "-s",
     new File(s"${spades.folder}/${spades.binary}").getCanonicalPath,
-    s"/usr/bin/${spades.binary}"
+    s"/usr/${spades.binary}"
   )
 
   def instructions: AnyInstructions = getTarball -&- extractTarball -&- linkBinaries
