@@ -15,3 +15,5 @@ libraryDependencies ++= Seq(
 
 // NOTE should be reestablished
 wartremoverErrors in (Compile, compile) := Seq()
+
+releaseOnlyTestTag := "ohnosequencesBundles.test.ReleaseOnlyTest"
