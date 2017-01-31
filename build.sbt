@@ -1,5 +1,3 @@
-Nice.scalaProject
-
 name := "spades"
 organization := "ohnosequences-bundles"
 description := "A bundle for spades tool"
@@ -12,6 +10,8 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "ohnosequences" %% "statika"   % "2.0.0-M5",
-  "org.scalatest" %% "scalatest" % "2.2.5" % Test
+  "ohnosequences" %% "statika" % "2.0.0"
 )
+
+// NOTE should be reestablished
+wartremoverErrors in (Compile, compile) := Seq()
